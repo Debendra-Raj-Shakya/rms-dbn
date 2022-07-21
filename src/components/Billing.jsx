@@ -24,6 +24,13 @@ const Billing = () => {
       ] },
   };
   const [activeState,setActiveState]=useState(1)
+
+  const changeState=(index)=>{
+    setActiveState(index)
+  }
+  const getIndexes=(()=>{
+    return Object.keys(desks)
+  })()
   return (
     <div>
       <div className="h-[500px]">
@@ -36,7 +43,7 @@ const Billing = () => {
             </tr>
           </thead>
           <tbody>
-            {desks[activeState].orders.map(({id,name,price,quantity})=>(
+            {desks[activeState].orders && desks[activeState].orders.map(({id,name,price,quantity})=>(
               <tr key={id}>
                 <td>{name}</td>
                 <td>{quantity}</td>
@@ -54,7 +61,7 @@ const Billing = () => {
       </div>
       <hr />
       <div className="h-[500px] p-4 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 justify-start  flex-wrap">
-        <Desks />
+        <Desks indexes={getIndexes} activeIndex={activeState} setIndex={changeState}/>
       </div>
     </div>
   );
