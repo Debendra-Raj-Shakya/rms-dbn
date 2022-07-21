@@ -1,5 +1,6 @@
-import Billing from "./components/Billing";
-import { Desks } from "./components/Desks";
+
+import Billing from "./components/Billing/Billing";
+
 import ProductList from "./components/ProductList";
 
 function App() {

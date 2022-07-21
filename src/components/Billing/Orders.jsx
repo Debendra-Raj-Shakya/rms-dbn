@@ -1,4 +1,5 @@
 import React from 'react'
+import Order from './Order'
 
 const Orders = ({orders}) => {
   return (
@@ -12,12 +13,8 @@ const Orders = ({orders}) => {
             </tr>
           </thead>
           <tbody>
-            {orders && orders.map(({id,name,price,quantity})=>(
-              <tr key={id}>
-                <td>{name}</td>
-                <td>{quantity}</td>
-                <td>{price}</td>
-              </tr>
+            {orders && orders.map((order)=>(
+             <Order order={order}/>
             ))}
           </tbody>
         </table>
