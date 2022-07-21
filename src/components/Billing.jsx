@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Desks } from "./Desks";
+import Orders from "./Orders";
 
 const Billing = () => {
   const desks = {
@@ -33,32 +34,7 @@ const Billing = () => {
   })()
   return (
     <div>
-      <div className="h-[500px]">
-        <table className="table w-full">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>quantity</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {desks[activeState].orders && desks[activeState].orders.map(({id,name,price,quantity})=>(
-              <tr key={id}>
-                <td>{name}</td>
-                <td>{quantity}</td>
-                <td>{price}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <hr />
-        <div className="flex justify-between px-5">
-          <div>Total</div>
-          <div>2000</div>
-        </div>
-        <hr />
-      </div>
+    <Orders orders={desks[activeState].orders} />
       <hr />
       <div className="h-[500px] p-4 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 justify-start  flex-wrap">
         <Desks indexes={getIndexes} activeIndex={activeState} setIndex={changeState}/>
