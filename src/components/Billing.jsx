@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Desks } from "./Desks";
 
 const Billing = () => {
+  const desks = {
+    1: {
+      orders: [
+        {id:1,name:'pizza',quantity:12,price:200},
+        {id:2,name:'burger',quantity:12,price:200},
+        {id:3,name:'pizza',quantity:12,price:200},
+        {id:4,name:'burger',quantity:12,price:200},
+      ],
+    },
+    2: { 
+      orders: [
+        {id:1,name:'pizza',quantity:12,price:200},
+        {id:2,name:'burger',quantity:12,price:200},
+        {id:3,name:'pizza',quantity:12,price:200},
+        {id:4,name:'burger',quantity:12,price:200},
+        {id:5,name:'pizza',quantity:12,price:200},
+        {id:6,name:'burger',quantity:12,price:200},
+        {id:7,name:'pizza',quantity:12,price:200},
+        {id:8,name:'burger',quantity:12,price:200},
+      ] },
+  };
+  const [activeState,setActiveState]=useState(1)
   return (
     <div>
       <div className="h-[500px]">
@@ -14,26 +36,13 @@ const Billing = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Pizza</td>
-              <td>1</td>
-              <td>500</td>
-            </tr>
-            <tr>
-              <td>Pizza</td>
-              <td>1</td>
-              <td>500</td>
-            </tr>{" "}
-            <tr>
-              <td>Pizza</td>
-              <td>1</td>
-              <td>500</td>
-            </tr>{" "}
-            <tr>
-              <td>Pizza</td>
-              <td>1</td>
-              <td>500</td>
-            </tr>
+            {desks[activeState].orders.map(({id,name,price,quantity})=>(
+              <tr key={id}>
+                <td>{name}</td>
+                <td>{quantity}</td>
+                <td>{price}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <hr />
