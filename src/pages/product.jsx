@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
-const AddProduct = () => {
+const Product = () => {
   return (
     <div className="h-screen w-screen flex justify-center">
       <Formik
@@ -126,4 +126,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default Product;
