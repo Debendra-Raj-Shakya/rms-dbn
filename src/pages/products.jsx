@@ -36,7 +36,7 @@ const Product = () => {
   const [modal,setModal]=useState(false)
   const addProduct=(product)=>{
     setProduct([...products,product])
-    setModal(true)
+    setModal(false)
 
   }
   return (

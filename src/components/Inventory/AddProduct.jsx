@@ -1,21 +1,33 @@
-import React from 'react'
-import {Formik,Form,Field} from "formik"
-const AddProduct = ({addProduct}) => {
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+const productValidationSchema = Yup.object().shape({
+  name: Yup.string().trim().min(3).required().label("Name"),
+  imageURL: Yup.string().trim().required().label("ImageURL"),
+  price: Yup.number().min(5).label("price"),
+  quantity: Yup.number().min(1).label("quantity"),
+  description: Yup.string().trim().required().min(3).label("description"),
+});
+
+const AddProduct = ({ addProduct }) => {
   return (
     <Formik
-    onSubmit={(data,{resetForm})=>{
-     addProduct(data)
-     resetForm();
-    }}
+      onSubmit={(data, { resetForm }) => {
+        addProduct(data);
+        resetForm();
+      }}
+      validationSchema={productValidationSchema}
       initialValues={{
-        name: "deben",
-        imageURL: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg",
+        name: "",
+        imageURL:"",
+        //   "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg",
         price: 0,
         quantity: 0,
         description: "",
       }}
     >
-      {({values,handleChange}) => (
+      {({ values, handleChange }) => (
         <>
           <Form>
             <div className="form-control w-full max-w-lg">
@@ -30,10 +42,13 @@ const AddProduct = ({addProduct}) => {
                 placeholder="Type name of food"
                 className="input input-bordered w-full max-w-lg"
               />
-              {/* <label className="label">
-              <span className="label-text-alt">Alt label</span>
-              <span className="label-text-alt">Alt label</span>
-            </label> */}
+              <label className="label">
+                <ErrorMessage
+                  name="name"
+                  component="span"
+                  className="label-text-alt"
+                />
+              </label>
             </div>
 
             {/* image ko lagi */}
@@ -50,10 +65,13 @@ const AddProduct = ({addProduct}) => {
                 placeholder="Image of food"
                 className="input input-bordered w-full max-w-lg"
               />
-              {/* <label className="label">
-              <span className="label-text-alt">Alt label</span>
-              <span className="label-text-alt">Alt label</span>
-            </label> */}
+              <label className="label">
+                <ErrorMessage
+                  name="imageURL"
+                  component="span"
+                  className="label-text-alt"
+                />
+              </label>
             </div>
 
             {/* description */}
@@ -62,7 +80,7 @@ const AddProduct = ({addProduct}) => {
                 <span className="label-text">Product Image</span>
               </label>
               <Field
-              as='textarea'
+                as="textarea"
                 name="description"
                 value={values.description}
                 onChange={handleChange}
@@ -71,10 +89,13 @@ const AddProduct = ({addProduct}) => {
                 // rows={4}
               />
 
-              {/* <label className="label">
-              <span className="label-text-alt">Alt label</span>
-              <span className="label-text-alt">Alt label</span>
-            </label> */}
+              <label className="label">
+                <ErrorMessage
+                  name="description"
+                  component="span"
+                  className="label-text-alt"
+                />
+              </label>
             </div>
 
             {/* price */}
@@ -90,10 +111,13 @@ const AddProduct = ({addProduct}) => {
                 placeholder="Type price of food"
                 className="input input-bordered w-full max-w-xs"
               />
-              {/* <label className="label">
-              <span className="label-text-alt">Alt label</span>
-              <span className="label-text-alt">Alt label</span>
-            </label> */}
+              <label className="label">
+                <ErrorMessage
+                  name="price"
+                  component="span"
+                  className="label-text-alt"
+                />
+              </label>
             </div>
 
             {/* quanitity */}
@@ -109,10 +133,10 @@ const AddProduct = ({addProduct}) => {
                 placeholder="Type quantity of food"
                 className="input input-bordered w-full max-w-lg"
               />
-              {/* <label className="label">
-              <span className="label-text-alt">Alt label</span>
-              <span className="label-text-alt">Alt label</span>
-            </label> */}
+              <label className="label">
+              <ErrorMessage name='quantity' component="span" className="label-text-alt"/>
+
+            </label>
             </div>
 
             <button type="submit" className="mt-4 btn btn-primary">
@@ -122,7 +146,7 @@ const AddProduct = ({addProduct}) => {
         </>
       )}
     </Formik>
-  )
-}
+  );
+};
 
-export default AddProduct
+export default AddProduct;
