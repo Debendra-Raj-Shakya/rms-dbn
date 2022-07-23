@@ -53,7 +53,7 @@ const Product = () => {
           Add Product in store
         </label> */}
 
-        <input type="checkbox" checked={ modal} id="add_product-modal" className="modal-toggle" />
+        <input type="checkbox" onChange={()=>setModal(true)} checked={ modal} id="add_product-modal" className="modal-toggle" />
         <div className="modal">
           <div className="modal-box relative">
           <button onClick={()=>setModal(false)} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>

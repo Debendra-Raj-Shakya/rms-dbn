@@ -20,7 +20,7 @@ const Orders = () => {
           </tr>
         </thead>
         <tbody>
-          {orders && orders.map((order) => <Order order={order} />)}
+          {orders && orders.map((order) => <Order key= {order.id}order={order} />)}
         </tbody>
       </table>
       <hr />

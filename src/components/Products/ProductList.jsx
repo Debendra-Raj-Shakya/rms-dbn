@@ -7,7 +7,7 @@ const {products}=useProduct()
   return (
     <div className="col-span-2 flex flex-wrap">
       {products.map((product) => (
-        <ProductCard product={product} />
+        <ProductCard key={product.id} product={product} />
       ))}
     </div>
   );

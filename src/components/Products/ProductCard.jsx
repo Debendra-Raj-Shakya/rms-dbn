@@ -19,6 +19,7 @@ const ProductCard = ({
           <input
             type="checkbox"
             checked={modal}
+            onChange={()=>setModal(false)}
             id="add_product-modal"
             className="modal-toggle"
           />
