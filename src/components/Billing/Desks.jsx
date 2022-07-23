@@ -1,6 +1,8 @@
 import React from "react";
+import { useBilling } from "../../context/Billing";
 
-export const Desks = ({ indexes, setIndex, activeIndex }) => {
+export const Desks = () => {
+  const {getIndexes:indexes,setActiveState:setIndex,activeState:activeIndex}=useBilling()
   return indexes.map((x) => (
     <button
       key={x}

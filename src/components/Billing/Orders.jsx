@@ -1,7 +1,9 @@
 import React from "react";
+import { useBilling } from "../../context/Billing";
 import Order from "./Order";
 
-const Orders = ({ orders }) => {
+const Orders = () => {
+  const {getActiveOrder:orders}=useBilling()
   const getTotalAmount = () => {
     return orders.reduce((x, y) => {
       return x = x + y.price * y.quantity;

@@ -1,5 +1,5 @@
 import React, {  useState } from "react";
-import { ProductContext, useProduct } from "../components/context/Product";
+import { ProductContext, useProduct } from "../context/Product";
 import AddProduct from "../components/Inventory/AddProduct";
 import ProductRow from "../components/Inventory/ProductRow";
 

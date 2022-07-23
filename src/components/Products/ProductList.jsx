@@ -1,5 +1,5 @@
 import React from "react";
-import { useProduct } from "../context/Product";
+import { useProduct } from "../../context/Product";
 import ProductCard from "./ProductCard";
 
 const ProductList = () => {
