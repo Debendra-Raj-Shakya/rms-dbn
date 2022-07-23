@@ -1,34 +1,52 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState } from "react";
+import { useProduct } from "./Product";
+import { v4 as uuidv4 } from "uuid";
 
-const BillingContext=createContext(undefined)
-const BillingProvider = ({children}) => {
-    const desks = {
-        1: {
-          orders: [
-           
-          ],
-        },
-        2: {
-          orders: [
-           
-          ],
-        },
-      };
-      const [activeState, setActiveState] = useState("1");
-      const getIndexes = (() => {
-        return Object.keys(desks);
-      })();
-      const getActiveOrder=(()=>desks[activeState].orders)();
+const BillingContext = createContext(undefined);
+const BillingProvider = ({ children }) => {
+  const { products } = useProduct();
+  const [desks, setDesks] = useState({
+    1: {
+      orders: [],
+    },
+    2: {
+      orders: [],
+    },
+  });
+  const [activeState, setActiveState] = useState("1");
+  const getIndexes = (() => {
+    return Object.keys(desks);
+  })();
+  const getActiveOrder = (() => desks[activeState].orders)();
+
+  const addOrder = (productId, quantity) => {
+    const id = uuidv4();
+
+    const selectedProduct = products.find((p) => p.id === productId);
+    const newDesks = { ...desks };
+    newDesks[activeState].orders.push({
+      id,
+      name: selectedProduct.name,
+      price: selectedProduct.price,
+      quantity: quantity,
+    });
+    console.log(desks)
+    setDesks(newDesks);
+  };
   return (
-  <BillingContext.Provider value={
-    {
-        setActiveState,activeState,getIndexes,getActiveOrder
-    }
-  }>
-{children}
-  </BillingContext.Provider>
-  )
-}
+    <BillingContext.Provider
+      value={{
+        setActiveState,
+        activeState,
+        getIndexes,
+        getActiveOrder,
+        addOrder,
+      }}
+    >
+      {children}
+    </BillingContext.Provider>
+  );
+};
 
-export default BillingProvider
-export const useBilling=()=>useContext(BillingContext)
+export default BillingProvider;
+export const useBilling = () => useContext(BillingContext);

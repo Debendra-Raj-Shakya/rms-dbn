@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import { useBilling } from "../../context/Billing";
 const ProductCard = ({
   product: { id, imageURL, name, price, description },
 }) => {
+  console.log(id);
   const [modal, setModal] = useState(false);
+  const { addOrder } = useBilling();
   return (
     <div key={id} className="card w-96 bg-base-100 shadow-xl h-[28rem]">
       <figure className="px-10 pt-10">
@@ -28,7 +31,12 @@ const ProductCard = ({
                 ✕
               </button>
               {/* quantity orders start */}
-              <Formik initialValues={{quantity:1}} onSubmit={()=>{}}>
+              <Formik
+                initialValues={{ quantity: 1 }}
+                onSubmit={(data) => {
+                  addOrder(id, data.quantity);
+                }}
+              >
                 {() => (
                   <Form>
                     <div className="form-control w-full max-w-xs">
@@ -50,17 +58,17 @@ const ProductCard = ({
                           className="label-text-alt"
                         />
                       </label>
+                      <div className="modal-action">
+                        <button type="submit" className="btn">
+                          submit
+                        </button>
+                      </div>
                     </div>
                   </Form>
                 )}
               </Formik>
 
               {/* quantity orders end */}
-              <div className="modal-action">
-                {/* <label htmlFor="add_product-modal" className="btn">
-                Add Product in store
-              </label> */}
-              </div>
             </div>
           </div>
           <div className="flex justify-end mx-10 my-6">

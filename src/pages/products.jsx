@@ -43,6 +43,7 @@ const Product = () => {
 
   // }
   const {products,addProduct}=useProduct()
+  console.log(products)
   return (
     <div className="h-screen w-screen ">
       {/* <!-- The button to open modal --> */}
