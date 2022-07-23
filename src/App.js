@@ -1,7 +1,7 @@
 
 import Billing from "./components/Billing/Billing";
+import ProductList from "./components/Products/ProductList";
 
-import ProductList from "./components/ProductList";
 
 function App() {
   return (
