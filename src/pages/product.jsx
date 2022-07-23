@@ -1,6 +1,36 @@
 import React from "react";
+import ProductRow from "../components/Inventory/ProductRow";
 
 const Product = () => {
+  const products = [
+    {
+      id: 1,
+      quantity: 5,
+      name: "pizza",
+      price: 120,
+      description: "pizza is good",
+      imageURL:
+        "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
+    },
+    {
+      id: 2,
+      quantity: 5,
+      name: "pizza",
+      price: 160,
+      description: "pizza is good",
+      imageURL:
+        "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
+    },
+    {
+      id: 3,
+      quantity: 5,
+      name: "pizza",
+      price: 180,
+      description: "pizza is good",
+      imageURL:
+        "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
+    },
+  ];
   return (
     <div className="h-screen w-screen ">
       <div className="flex justify-end mx-10 my-6">
@@ -12,34 +42,22 @@ const Product = () => {
           {/* <!-- head --> */}
           <thead>
             <tr>
-              <th></th>
+              <th>id</th>
               <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Image</th>
+
             </tr>
           </thead>
           <tbody>
             {/* <!-- row 1 --> */}
-            <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
-              <td>Blue</td>
-            </tr>
-            {/* <!-- row 2 --> */}
-            <tr>
-              <th>2</th>
-              <td>Hart Hagerty</td>
-              <td>Desktop Support Technician</td>
-              <td>Purple</td>
-            </tr>
-            {/* <!-- row 3 --> */}
-            <tr>
-              <th>3</th>
-              <td>Brice Swyre</td>
-              <td>Tax Accountant</td>
-              <td>Red</td>
-            </tr>
+         {products.map((product)=>{
+          return (
+            <ProductRow key={product.id} product={product}/>
+          )
+         })}
+          
           </tbody>
         </table>
       </div>
