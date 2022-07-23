@@ -1,4 +1,5 @@
 import React from "react";
+import AddProduct from "../components/Inventory/AddProduct";
 import ProductRow from "../components/Inventory/ProductRow";
 
 const Product = () => {
@@ -33,9 +34,26 @@ const Product = () => {
   ];
   return (
     <div className="h-screen w-screen ">
-      <div className="flex justify-end mx-10 my-6">
-        <button className="btn btn-primary">add product</button>
+      {/* <!-- The button to open modal --> */}
 
+      <div className="flex justify-end mx-10 my-6">
+        {/* <button className="btn btn-primary">add product</button> */}
+        <label htmlFor="add_product-modal" className="btn modal-button">
+          Add Product in store
+        </label>
+
+        <input type="checkbox" id="add_product-modal" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box">
+          <label htmlFor="add_product-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+            <AddProduct />
+            <div className="modal-action">
+              <label htmlFor="add_product-modal" className="btn">
+                Add Product in store
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="overflow-x-hidden">
         <table className="table table-zebra w-full">
@@ -47,17 +65,13 @@ const Product = () => {
               <th>Quantity</th>
               <th>Price</th>
               <th>Image</th>
-
             </tr>
           </thead>
           <tbody>
             {/* <!-- row 1 --> */}
-         {products.map((product)=>{
-          return (
-            <ProductRow key={product.id} product={product}/>
-          )
-         })}
-          
+            {products.map((product) => {
+              return <ProductRow key={product.id} product={product} />;
+            })}
           </tbody>
         </table>
       </div>
