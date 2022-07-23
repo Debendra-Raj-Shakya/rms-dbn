@@ -3,11 +3,13 @@ import { useBilling } from "../../context/Billing";
 import Order from "./Order";
 
 const Orders = () => {
-  const {getActiveOrder:orders}=useBilling()
+  const { getActiveOrder: orders } = useBilling();
   const getTotalAmount = () => {
-    return orders.reduce((x, y) => {
-      return x = x + y.price * y.quantity;
-    }, 0);
+    return orders
+      ? orders.reduce((x, y) => {
+          return (x = x + y.price * y.quantity);
+        }, 0)
+      : 0;
   };
   return (
     <div className="h-[500px]">
@@ -20,7 +22,8 @@ const Orders = () => {
           </tr>
         </thead>
         <tbody>
-          {orders && orders.map((order) => <Order key= {order.id}order={order} />)}
+          {orders &&
+            orders.map((order) => <Order key={order.id} order={order} />)}
         </tbody>
       </table>
       <hr />
