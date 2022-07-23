@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const BillingContext = createContext(undefined);
 const BillingProvider = ({ children }) => {
-  const { products } = useProduct();
+  const { products,updateQuantity } = useProduct();
   const [desks, setDesks] = useState({
     1: {
       orders: [],
@@ -23,15 +23,19 @@ const BillingProvider = ({ children }) => {
     const id = uuidv4();
 
     const selectedProduct = products.find((p) => p.id === productId);
-    const newDesks = { ...desks };
-    newDesks[activeState].orders.push({
-      id,
-      name: selectedProduct.name,
-      price: selectedProduct.price,
-      quantity: quantity,
-    });
-    console.log(desks)
-    setDesks(newDesks);
+    if(selectedProduct.quantity>= quantity){
+
+      const newDesks = { ...desks };
+      newDesks[activeState].orders.push({
+        id,
+        name: selectedProduct.name,
+        price: selectedProduct.price,
+        quantity: quantity,
+      });
+      updateQuantity(productId,quantity)
+      console.log(desks)
+      setDesks(newDesks);
+    }
   };
   return (
     <BillingContext.Provider
