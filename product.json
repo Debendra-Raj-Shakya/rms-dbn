@@ -1,0 +1,23 @@
+[
+    {
+        "id":1,
+        "quantity":5,
+        "name":"pizza",
+        "price":120,
+        "imageURL":"https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg"
+    },
+    {
+        "id":2,
+        "quantity":5,
+        "name":"pizza",
+        "price":160,
+        "imageURL":"https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg"
+    },
+    {
+        "id":3,
+        "quantity":5,
+        "name":"pizza",
+        "price":180,
+        "imageURL":"https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg"
+    }
+]

@@ -1,120 +1,52 @@
 import React from "react";
 
 const ProductList = () => {
+  const products=   [{
+    "id":1,
+    "quantity":5,
+    "name":"pizza",
+    "price":120,
+    "description":"pizza is good",
+    "imageURL":"https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg"
+},
+{
+    "id":2,
+    "quantity":5,
+    "name":"pizza",
+    "price":160,
+    "description":"pizza is good",
+    "imageURL":"https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg"
+},
+{
+    "id":3,
+    "quantity":5,
+    "name":"pizza",
+    "price":180,
+    "description":"pizza is good",
+    "imageURL":"https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg"
+}]
   return (
     <div className="col-span-2 flex flex-wrap">
-      <div className="card w-96 bg-base-100 shadow-xl h-[28rem]">
+      {products.map(({id,quantity,name,price,imageURL,description})=>(
+      <div key={id}className="card w-96 bg-base-100 shadow-xl h-[28rem]">
         <figure className="px-10 pt-10">
           <img
-            src="https://placeimg.com/400/225/arch"
-            alt="Shoes"
+            src={imageURL}
+            alt={name}
             className="rounded-xl"
           />
         </figure>
         <div className="card-body items-center text-center">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <h2 className="card-title">{name}</h2>
+          <p>{description}</p>
           <div className="card-actions">
-            <button className="btn btn-primary">Buy Now</button>
+            <button className="btn btn-primary">Buy Now/Order {price}</button>
           </div>
         </div>
       </div>
-      <div className="card w-96 bg-base-100 shadow-xl h-[28rem]">
-        <figure className="px-10 pt-10">
-          <img
-            src="https://placeimg.com/400/225/arch"
-            alt="Shoes"
-            className="rounded-xl"
-          />
-        </figure>
-        <div className="card-body items-center text-center">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>{" "}
-      <div className="card w-96 bg-base-100 shadow-xl h-[28rem]">
-        <figure className="px-10 pt-10">
-          <img
-            src="https://placeimg.com/400/225/arch"
-            alt="Shoes"
-            className="rounded-xl"
-          />
-        </figure>
-        <div className="card-body items-center text-center">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>{" "}
-      <div className="card w-96 bg-base-100 shadow-xl h-[28rem]">
-        <figure className="px-10 pt-10">
-          <img
-            src="https://placeimg.com/400/225/arch"
-            alt="Shoes"
-            className="rounded-xl"
-          />
-        </figure>
-        <div className="card-body items-center text-center">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>{" "}
-      <div className="card w-96 bg-base-100 shadow-xl h-[28rem]">
-        <figure className="px-10 pt-10">
-          <img
-            src="https://placeimg.com/400/225/arch"
-            alt="Shoes"
-            className="rounded-xl"
-          />
-        </figure>
-        <div className="card-body items-center text-center">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>{" "}
-      <div className="card w-96 bg-base-100 shadow-xl h-[28rem]">
-        <figure className="px-10 pt-10">
-          <img
-            src="https://placeimg.com/400/225/arch"
-            alt="Shoes"
-            className="rounded-xl"
-          />
-        </figure>
-        <div className="card-body items-center text-center">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>{" "}
-      <div className="card w-96 bg-base-100 shadow-xl h-[28rem]">
-        <figure className="px-10 pt-10">
-          <img
-            src="https://placeimg.com/400/225/arch"
-            alt="Shoes"
-            className="rounded-xl"
-          />
-        </figure>
-        <div className="card-body items-center text-center">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>
+
+      ))}
+     
     </div>
   );
 };
