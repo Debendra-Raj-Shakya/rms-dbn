@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useState } from "react";
 import { useProduct } from "./Product";
 import { v4 as uuidv4 } from "uuid";
+import { useToast } from "./Toast";
 
 const BillingContext = createContext(undefined);
 const BillingProvider = ({ children }) => {
   const { products,updateQuantity } = useProduct();
+  const {addToast}= useToast()
   const [desks, setDesks] = useState({
     1: {
       orders: [],
@@ -35,6 +37,8 @@ const BillingProvider = ({ children }) => {
       updateQuantity(productId,quantity)
       console.log(desks)
       setDesks(newDesks);
+    }else{
+      addToast({type:'error',message:"out of stock"})
     }
   };
   return (

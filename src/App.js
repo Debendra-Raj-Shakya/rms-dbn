@@ -4,10 +4,13 @@ import Navbar from "./components/Layout/Navbar";
 import HomePage from "./pages/homePage";
 import Product from "./pages/products";
 import BillingProvider from "./context/Billing";
+import ToastProvider from "./context/Toast";
 
 function App() {
   return (
     <div className="App">
+      <ToastProvider>
+
       <ProductProvider>
         <BillingProvider>
           <BrowserRouter>
@@ -19,6 +22,7 @@ function App() {
           </BrowserRouter>
         </BillingProvider>
       </ProductProvider>
+      </ToastProvider>
     </div>
   );
 }
