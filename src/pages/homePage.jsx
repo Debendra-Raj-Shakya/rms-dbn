@@ -1,6 +1,6 @@
 import React from "react";
-import Billing from "../Billing/Billing";
-import ProductList from "../Products/ProductList";
+import Billing from "../components/Billing/Billing";
+import ProductList from "../components/Products/ProductList";
 
 const HomePage = () => {
   return (
