@@ -33,32 +33,36 @@ const Product = () => {
   //   },
   // ];
   const [products,setProduct]=useState([])
+  const [modal,setModal]=useState(false)
   const addProduct=(product)=>{
     setProduct([...products,product])
+    setModal(true)
 
   }
   return (
     <div className="h-screen w-screen ">
       {/* <!-- The button to open modal --> */}
 
-      <div className="flex justify-end mx-10 my-6">
-        {/* <button className="btn btn-primary">add product</button> */}
-        <label htmlFor="add_product-modal" className="btn modal-button">
+    
+        {/* <label htmlFor="add_product-modal" className="btn modal-button">
           Add Product in store
-        </label>
+        </label> */}
 
-        <input type="checkbox" id="add_product-modal" className="modal-toggle" />
+        <input type="checkbox" checked={ modal} id="add_product-modal" className="modal-toggle" />
         <div className="modal">
-          <div className="modal-box">
-          <label htmlFor="add_product-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+          <div className="modal-box relative">
+          <button onClick={()=>setModal(false)} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
             <AddProduct addProduct={addProduct}/>
             <div className="modal-action">
-              <label htmlFor="add_product-modal" className="btn">
+              {/* <label htmlFor="add_product-modal" className="btn">
                 Add Product in store
-              </label>
+              </label> */}
             </div>
           </div>
         </div>
+        <div className="flex justify-end mx-10 my-6">
+        <button onClick={()=>setModal(true)} className="btn btn-primary">add products</button>
+
       </div>
       <div className="overflow-x-hidden">
         <table className="table table-zebra w-full">
