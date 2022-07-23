@@ -3,8 +3,9 @@ import {Formik,Form,Field} from "formik"
 const AddProduct = ({addProduct}) => {
   return (
     <Formik
-    onSubmit={(data)=>{
+    onSubmit={(data,{resetForm})=>{
      addProduct(data)
+     resetForm();
     }}
       initialValues={{
         name: "deben",
