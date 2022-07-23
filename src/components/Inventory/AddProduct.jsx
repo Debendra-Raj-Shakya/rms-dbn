@@ -1,14 +1,14 @@
 import React from 'react'
 import {Formik,Form,Field} from "formik"
-const AddProduct = () => {
+const AddProduct = ({addProduct}) => {
   return (
     <Formik
     onSubmit={(data)=>{
-      console.log(data)
+     addProduct(data)
     }}
       initialValues={{
         name: "deben",
-        imageURL: "",
+        imageURL: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg",
         price: 0,
         quantity: 0,
         description: "",
@@ -42,7 +42,7 @@ const AddProduct = () => {
                 <span className="label-text">Product Image</span>
               </label>
               <Field
-                name="imageUrl"
+                name="imageURL"
                 // value={values.imageURL}
                 // onChange={handleChange}
                 type="text"
