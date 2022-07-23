@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ProductContext } from "../components/context/Product";
 import AddProduct from "../components/Inventory/AddProduct";
 import ProductRow from "../components/Inventory/ProductRow";
 
@@ -32,13 +33,16 @@ const Product = () => {
   //       "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
   //   },
   // ];
-  const [products,setProduct]=useState([])
-  const [modal,setModal]=useState(false)
-  const addProduct=(product)=>{
-    setProduct([...products,product])
-    setModal(false)
 
-  }
+
+  // const [products,setProduct]=useState([])
+  const [modal,setModal]=useState(false)
+  // const addProduct=(product)=>{
+  //   setProduct([...products,product])
+  //   setModal(false)
+
+  // }
+  const {products,addProduct}=useContext(ProductContext)
   return (
     <div className="h-screen w-screen ">
       {/* <!-- The button to open modal --> */}
