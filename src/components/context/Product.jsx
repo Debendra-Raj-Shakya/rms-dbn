@@ -1,6 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-export const ProductContext = createContext(undefined);
+ const ProductContext = createContext(undefined);
 const ProductProvider = ({ children }) => {
   const [products, setProduct] = useState([]);
   const [modal, setModal] = useState(false);
@@ -17,3 +17,5 @@ const ProductProvider = ({ children }) => {
 };
 
 export default ProductProvider;
+
+export const useProduct = () => useContext(ProductContext);

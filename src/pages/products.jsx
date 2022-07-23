@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { ProductContext } from "../components/context/Product";
+import React, {  useState } from "react";
+import { ProductContext, useProduct } from "../components/context/Product";
 import AddProduct from "../components/Inventory/AddProduct";
 import ProductRow from "../components/Inventory/ProductRow";
 
@@ -42,7 +42,7 @@ const Product = () => {
   //   setModal(false)
 
   // }
-  const {products,addProduct}=useContext(ProductContext)
+  const {products,addProduct}=useProduct()
   return (
     <div className="h-screen w-screen ">
       {/* <!-- The button to open modal --> */}
