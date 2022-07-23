@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 const AddProduct = () => {
   return (
     <div className="h-screen w-screen flex justify-center">
@@ -22,10 +22,10 @@ const AddProduct = () => {
                 <label className="label">
                   <span className="label-text">Product Name</span>
                 </label>
-                <input
+                <Field
                   name="name"
-                  value={values.name}
-                  onChange={handleChange}
+                  // value={values.name}
+                  // onChange={handleChange}
                   type="text"
                   placeholder="Type name of food"
                   className="input input-bordered w-full max-w-lg"
@@ -42,10 +42,10 @@ const AddProduct = () => {
                 <label className="label">
                   <span className="label-text">Product Image</span>
                 </label>
-                <input
+                <Field
                   name="imageUrl"
-                  value={values.imageURL}
-                  onChange={handleChange}
+                  // value={values.imageURL}
+                  // onChange={handleChange}
                   type="text"
                   placeholder="Image of food"
                   className="input input-bordered w-full max-w-lg"
@@ -61,14 +61,15 @@ const AddProduct = () => {
                 <label className="label">
                   <span className="label-text">Product Image</span>
                 </label>
-                <textarea
+                <Field
+                as='textarea'
                   name="description"
                   value={values.description}
                   onChange={handleChange}
-                  className="input input-bordered w-full max-w-lg"
-                  type="textarea"
+                  className="textarea input input-bordered w-full max-w-lg h-20"
                   placeholder="Bio"
-                ></textarea>
+                  // rows={4}
+                />
 
                 {/* <label className="label">
                 <span className="label-text-alt">Alt label</span>
@@ -81,10 +82,10 @@ const AddProduct = () => {
                 <label className="label">
                   <span className="label-text">Product price</span>
                 </label>
-                <input
+                <Field
                   name="price"
-                  value={values.price}
-                  onChange={handleChange}
+                  // value={values.price}
+                  // onChange={handleChange}
                   type="number"
                   placeholder="Type price of food"
                   className="input input-bordered w-full max-w-xs"
@@ -100,10 +101,10 @@ const AddProduct = () => {
                 <label className="label">
                   <span className="label-text">Product Quantity</span>
                 </label>
-                <input
+                <Field
                   name="quantity"
-                  value={values.quantity}
-                  onChange={handleChange}
+                  // value={values.quantity}
+                  // onChange={handleChange}
                   type="number"
                   placeholder="Type quantity of food"
                   className="input input-bordered w-full max-w-lg"
