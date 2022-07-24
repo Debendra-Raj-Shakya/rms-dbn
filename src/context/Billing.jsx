@@ -35,7 +35,6 @@ const BillingProvider = ({ children }) => {
         quantity: quantity,
       });
       updateQuantity(productId,quantity)
-      console.log(desks)
       setDesks(newDesks);
     }else{
       addToast({type:'error',message:"out of stock"})
