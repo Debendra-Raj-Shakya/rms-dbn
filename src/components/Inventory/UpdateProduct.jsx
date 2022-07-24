@@ -10,24 +10,29 @@ const productValidationSchema = Yup.object().shape({
     quantity: Yup.number().min(1).label("quantity"),
     description: Yup.string().trim().required().min(3).label("description"),
   });
-const UpdateProduct = (id,name,imageURL,price) => {
+const UpdateProduct = ({id},name,imageURL,price) => {
+
+  const {updateContextProduct}=useProduct()
+
     const {products}=useProduct()
-    console.log(products,"products")
-    console.log("id",id)
     const newProducts = [...products ];
-    console.log("newproducts",newProducts)
-    const updatedProduct = newProducts.find((p) => p.id === id);
-    console.log("updatedproduct",updatedProduct)
+    
+    const updatedProduct =newProducts.find((p) => p.id=== id);
+    // console.log(updatedProduct)
+
+
 
     return (
     <Formik
     onSubmit={(data, { resetForm }) => {
     //   addProduct(data);
+    updateContextProduct(data,id)
+
       resetForm();
     }}
     validationSchema={productValidationSchema}
     initialValues={{
-      name: "",
+      name: `${updatedProduct.name}`,
       imageURL:"",
       //   "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg",
       price:0,
@@ -44,7 +49,7 @@ const UpdateProduct = (id,name,imageURL,price) => {
             </label>
             <Field
               name="name"
-              // value={values.name}
+              // value={updatedProduct.name}
               // onChange={handleChange}
               type="text"
               placeholder="Type name of food"
@@ -67,6 +72,7 @@ const UpdateProduct = (id,name,imageURL,price) => {
             </label>
             <Field
               name="imageURL"
+              value={updatedProduct.imageURL}
               // value={values.imageURL}
               // onChange={handleChange}
               type="text"
@@ -85,12 +91,12 @@ const UpdateProduct = (id,name,imageURL,price) => {
           {/* description */}
           <div className="form-control w-full max-w-lg">
             <label className="label">
-              <span className="label-text">Product Image</span>
+              <span className="label-text">description</span>
             </label>
             <Field
               as="textarea"
               name="description"
-              value={values.description}
+              value={updatedProduct.description}
               onChange={handleChange}
               className="textarea input input-bordered w-full max-w-lg h-20"
               placeholder="Bio"
@@ -113,7 +119,7 @@ const UpdateProduct = (id,name,imageURL,price) => {
             </label>
             <Field
               name="price"
-              // value={values.price}
+              value={updatedProduct.price}
               // onChange={handleChange}
               type="number"
               placeholder="Type price of food"
@@ -135,7 +141,7 @@ const UpdateProduct = (id,name,imageURL,price) => {
             </label>
             <Field
               name="quantity"
-              // value={values.quantity}
+              value={updatedProduct.quantity}
               // onChange={handleChange}
               type="number"
               placeholder="Type quantity of food"

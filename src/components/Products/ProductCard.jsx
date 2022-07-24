@@ -4,7 +4,7 @@ import { useBilling } from "../../context/Billing";
 const ProductCard = ({
   product: { id, imageURL, name, price, description },
 }) => {
-  console.log(id);
+
   const [modal, setModal] = useState(false);
   const { addOrder } = useBilling();
   return (

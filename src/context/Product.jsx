@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 const ProductContext = createContext(undefined);
 const ProductProvider = ({ children }) => {
   const [products, setProduct] = useState([]);
+
   const [modal, setModal] = useState(false);
 
   const addProduct = (product) => {
@@ -11,12 +12,18 @@ const ProductProvider = ({ children }) => {
     setProduct([...products, product]);
     // setModal(false);
   };
-const updateProduct=(product)=>{
-
-  console.log(products)
+const updateContextProduct=(data,id)=>{
+  console.log("realproducts",products)
   const newProducts = [...products ];
-  const updatedProduct = newProducts.find((p) => p.id == product.id);
-  console.log(updatedProduct)
+  console.log("newproduct", newProducts)
+  const updateProduct=newProducts.find((p)=>p.id===id)
+  console.log("updateProduct",updateProduct)
+
+  updateProduct.name=data.name
+  updateProduct.imageURL=data.imageURL
+  updateProduct.description=data.description
+
+  
 }
   
 
@@ -27,7 +34,7 @@ const updateProduct=(product)=>{
   };
 
   return (
-    <ProductContext.Provider value={{ products, addProduct,updateQuantity }}>
+    <ProductContext.Provider value={{ products, addProduct,updateQuantity,updateContextProduct }}>
       {children}
     </ProductContext.Provider>
   );
