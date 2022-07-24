@@ -27,17 +27,16 @@ const UpdateProduct = ({id},name,imageURL,price) => {
     onSubmit={(data, { resetForm }) => {
     //   addProduct(data);
     updateContextProduct(data,id)
-
       resetForm();
     }}
     validationSchema={productValidationSchema}
     initialValues={{
       name: `${updatedProduct.name}`,
-      imageURL:"",
+      imageURL:`${updatedProduct.imageURL}`,
       //   "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg",
-      price:0,
-      quantity: 0,
-      description: "",
+      price:updatedProduct.price,
+      quantity: updatedProduct.quantity,
+      description: `${updatedProduct.description}`,
     }}
   >
     {({ values, handleChange }) => (
@@ -72,7 +71,6 @@ const UpdateProduct = ({id},name,imageURL,price) => {
             </label>
             <Field
               name="imageURL"
-              value={updatedProduct.imageURL}
               // value={values.imageURL}
               // onChange={handleChange}
               type="text"
@@ -96,7 +94,7 @@ const UpdateProduct = ({id},name,imageURL,price) => {
             <Field
               as="textarea"
               name="description"
-              value={updatedProduct.description}
+             
               onChange={handleChange}
               className="textarea input input-bordered w-full max-w-lg h-20"
               placeholder="Bio"
@@ -119,7 +117,7 @@ const UpdateProduct = ({id},name,imageURL,price) => {
             </label>
             <Field
               name="price"
-              value={updatedProduct.price}
+            
               // onChange={handleChange}
               type="number"
               placeholder="Type price of food"
@@ -141,7 +139,7 @@ const UpdateProduct = ({id},name,imageURL,price) => {
             </label>
             <Field
               name="quantity"
-              value={updatedProduct.quantity}
+       
               // onChange={handleChange}
               type="number"
               placeholder="Type quantity of food"
