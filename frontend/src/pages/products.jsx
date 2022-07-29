@@ -1,9 +1,31 @@
-import React, {  useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ProductContext, useProduct } from "../context/Product";
 import AddProduct from "../components/Inventory/AddProduct";
 import ProductRow from "../components/Inventory/ProductRow";
 
 const Product = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      const res=await fetch("http://localhost:8000/product",{
+        method:"GET",
+      }) 
+      const data= await res.json()
+      console.log(data)
+      // {
+        // method: "GET",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        // body: JSON.stringify(),
+      // })
+      // .catch((error) => {
+      //   window.alert(error);
+      //   return;
+      // }
+      // );
+    };
+    fetchData();
+  }, []);
   // const products = [
   //   {
   //     id: 1,
@@ -34,40 +56,50 @@ const Product = () => {
   //   },
   // ];
 
-
   // const [products,setProduct]=useState([])
-  const [modal,setModal]=useState(false)
+  const [modal, setModal] = useState(false);
   // const addProduct=(product)=>{
   //   setProduct([...products,product])
   //   setModal(false)
 
   // }
-  const {products,addProduct}=useProduct()
-  console.log(products)
+  const { products, addProduct } = useProduct();
+  console.log(products);
   return (
     <div className="h-screen w-screen ">
       {/* <!-- The button to open modal --> */}
 
-    
-        {/* <label htmlFor="add_product-modal" className="btn modal-button">
+      {/* <label htmlFor="add_product-modal" className="btn modal-button">
           Add Product in store
         </label> */}
 
-        <input type="checkbox" onChange={()=>setModal(true)} checked={ modal} id="add_product-modal" className="modal-toggle" />
-        <div className="modal">
-          <div className="modal-box relative">
-          <button onClick={()=>setModal(false)} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
-            <AddProduct addProduct={addProduct}/>
-            <div className="modal-action">
-              {/* <label htmlFor="add_product-modal" className="btn">
+      <input
+        type="checkbox"
+        onChange={() => setModal(true)}
+        checked={modal}
+        id="add_product-modal"
+        className="modal-toggle"
+      />
+      <div className="modal">
+        <div className="modal-box relative">
+          <button
+            onClick={() => setModal(false)}
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </button>
+          <AddProduct addProduct={addProduct} />
+          <div className="modal-action">
+            {/* <label htmlFor="add_product-modal" className="btn">
                 Add Product in store
               </label> */}
-            </div>
           </div>
         </div>
-        <div className="flex justify-end mx-10 my-6">
-        <button onClick={()=>setModal(true)} className="btn btn-primary">add products</button>
-
+      </div>
+      <div className="flex justify-end mx-10 my-6">
+        <button onClick={() => setModal(true)} className="btn btn-primary">
+          add products
+        </button>
       </div>
       <div className="overflow-x-hidden">
         <table className="table table-zebra w-full">
