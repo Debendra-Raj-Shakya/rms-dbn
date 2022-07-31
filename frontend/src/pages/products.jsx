@@ -1,84 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { ProductContext, useProduct } from "../context/Product";
+import React, { useState } from "react";
+import { useProduct } from "../contexts/Product";
 import AddProduct from "../components/Inventory/AddProduct";
 import ProductRow from "../components/Inventory/ProductRow";
-
-const Product = () => {
-  useEffect(() => {
-    const fetchData = async () => {
-      const res=await fetch("http://localhost:8000/product",{
-        method:"GET",
-      }) 
-      const data= await res.json()
-      console.log(data)
-      // {
-        // method: "GET",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        // body: JSON.stringify(),
-      // })
-      // .catch((error) => {
-      //   window.alert(error);
-      //   return;
-      // }
-      // );
-    };
-    fetchData();
-  }, []);
-  // const products = [
-  //   {
-  //     id: 1,
-  //     quantity: 5,
-  //     name: "pizza",
-  //     price: 120,
-  //     description: "pizza is good",
-  //     imageURL:
-  //       "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
-  //   },
-  //   {
-  //     id: 2,
-  //     quantity: 5,
-  //     name: "pizza",
-  //     price: 160,
-  //     description: "pizza is good",
-  //     imageURL:
-  //       "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
-  //   },
-  //   {
-  //     id: 3,
-  //     quantity: 5,
-  //     name: "pizza",
-  //     price: 180,
-  //     description: "pizza is good",
-  //     imageURL:
-  //       "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
-  //   },
-  // ];
-
-  // const [products,setProduct]=useState([])
-  const [modal, setModal] = useState(false);
-  // const addProduct=(product)=>{
-  //   setProduct([...products,product])
-  //   setModal(false)
-
-  // }
+const Products = () => {
   const { products, addProduct } = useProduct();
-  console.log(products);
+
+  const [model, setModal] = useState(false);
+
   return (
     <div className="h-screen w-screen ">
-      {/* <!-- The button to open modal --> */}
-
-      {/* <label htmlFor="add_product-modal" className="btn modal-button">
-          Add Product in store
-        </label> */}
-
       <input
-        type="checkbox"
+        checked={model}
         onChange={() => setModal(true)}
-        checked={modal}
-        id="add_product-modal"
-        className="modal-toggle"
+        type="checkbox"
+        id="ad_product_model"
+        className="modal-toggle !block "
       />
       <div className="modal">
         <div className="modal-box relative">
@@ -89,35 +25,28 @@ const Product = () => {
             ✕
           </button>
           <AddProduct addProduct={addProduct} />
-          <div className="modal-action">
-            {/* <label htmlFor="add_product-modal" className="btn">
-                Add Product in store
-              </label> */}
-          </div>
         </div>
       </div>
-      <div className="flex justify-end mx-10 my-6">
-        <button onClick={() => setModal(true)} className="btn btn-primary">
-          add products
+      <div className="flex justify-end mx-3 my-4">
+        <button onClick={() => setModal(true)} className="btn modal-button">
+          Add Product
         </button>
       </div>
-      <div className="overflow-x-hidden">
+      <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
-          {/* <!-- head --> */}
           <thead>
             <tr>
-              <th>id</th>
+              <th></th>
               <th>Name</th>
               <th>Quantity</th>
-              <th>Price</th>
-              <th>Image</th>
+              <th>price</th>
+              <th>image</th>
             </tr>
           </thead>
           <tbody>
-            {/* <!-- row 1 --> */}
-            {products.map((product) => {
-              return <ProductRow key={product.id} product={product} />;
-            })}
+            {products.map((product) => (
+              <ProductRow key={product.id} product={product} />
+            ))}
           </tbody>
         </table>
       </div>
@@ -125,4 +54,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default Products;

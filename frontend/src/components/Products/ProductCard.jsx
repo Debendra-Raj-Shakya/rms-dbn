@@ -1,82 +1,76 @@
-import React, { useContext, useState } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { useBilling } from "../../context/Billing";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import React, { useState } from "react";
+import { useBilling } from "../../contexts/Billing";
+
 const ProductCard = ({
-  product: { id, imageURL, name, price, description },
+  product: { id, name, price, imageUrl, description },
 }) => {
-  console.log(id);
-  const [modal, setModal] = useState(false);
+  const [model, setModel] = useState(false);
   const { addOrder } = useBilling();
   return (
     <div key={id} className="card w-96 bg-base-100 shadow-xl h-[28rem]">
+      <input
+        checked={model}
+        onChange={() => setModel(false)}
+        type="checkbox"
+        id="ad_product_model"
+        className="modal-toggle !block "
+      />
+      <div className="modal">
+        <div className="modal-box relative">
+          <button
+            onClick={() => setModel(false)}
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </button>
+          {/* Add Order*/}
+          <Formik
+            initialValues={{ quantity: 1 }}
+            onSubmit={(data) => {
+              addOrder(id, data.quantity);
+            }}
+          >
+            {() => (
+              <Form>
+                <div className="form-control w-full max-w-lg">
+                  <label className="label">
+                    <span className="label-text-alt">Quantity</span>
+                  </label>
+                  <Field
+                    type="number"
+                    placeholder="quantity?"
+                    className="input input-bordered w-full max-w-lg"
+                    name="quantity"
+                  />
+                  <label class="label">
+                    <ErrorMessage
+                      name="quantity"
+                      component="span"
+                      className="label-text-alt text-error"
+                    />
+                  </label>
+                </div>
+
+                <button type="submit" className="mt-4 btn btn-primary">
+                  Submit
+                </button>
+              </Form>
+            )}
+          </Formik>
+          {/* add Order end */}
+        </div>
+      </div>
       <figure className="px-10 pt-10">
-        <img src={imageURL} alt={name} className="rounded-xl" />
+        <img src={imageUrl} alt="Shoes" className="rounded-xl" />
       </figure>
       <div className="card-body items-center text-center">
         <h2 className="card-title">{name}</h2>
         <p>{description}</p>
         <div className="card-actions">
-          <input
-            type="checkbox"
-            checked={modal}
-            onChange={()=>setModal(false)}
-            id="add_product-modal"
-            className="modal-toggle"
-          />
-          <div className="modal">
-            <div className="modal-box relative">
-              <button
-                onClick={() => setModal(false)}
-                className="btn btn-sm btn-circle absolute right-2 top-2"
-              >
-                ✕
-              </button>
-              {/* quantity orders start */}
-              <Formik
-                initialValues={{ quantity: 1 }}
-                onSubmit={(data) => {
-                  addOrder(id, data.quantity);
-                }}
-              >
-                {() => (
-                  <Form>
-                    <div className="form-control w-full max-w-xs">
-                      <label className="label">
-                        <span className="label-text">Product Quantity</span>
-                      </label>
-                      <Field
-                        name="quantity"
-                        // value={values.quantity}
-                        // onChange={handleChange}
-                        type="number"
-                        placeholder="Type quantity of food"
-                        className="input input-bordered w-full max-w-lg"
-                      />
-                      <label className="label">
-                        <ErrorMessage
-                          name="quantity"
-                          component="span"
-                          className="label-text-alt"
-                        />
-                      </label>
-                      <div className="modal-action">
-                        <button type="submit" className="btn">
-                          submit
-                        </button>
-                      </div>
-                    </div>
-                  </Form>
-                )}
-              </Formik>
-
-              {/* quantity orders end */}
-            </div>
-          </div>
-          <div className="flex justify-end mx-10 my-6">
-            <button onClick={() => setModal(true)} className="btn btn-primary">
-              add products
-            </button>
-          </div>
+          <button className="btn btn-primary" onClick={() => setModel(true)}>
+            Order {price}
+          </button>
         </div>
       </div>
     </div>
