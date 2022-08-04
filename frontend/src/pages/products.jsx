@@ -1,91 +1,52 @@
-import React, {  useState } from "react";
-import { ProductContext, useProduct } from "../context/Product";
+import React, { useState } from "react";
+import { useProduct } from "../contexts/Product";
 import AddProduct from "../components/Inventory/AddProduct";
 import ProductRow from "../components/Inventory/ProductRow";
+const Products = () => {
+  const { products, addProduct } = useProduct();
 
-const Product = () => {
-  // const products = [
-  //   {
-  //     id: 1,
-  //     quantity: 5,
-  //     name: "pizza",
-  //     price: 120,
-  //     description: "pizza is good",
-  //     imageURL:
-  //       "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
-  //   },
-  //   {
-  //     id: 2,
-  //     quantity: 5,
-  //     name: "pizza",
-  //     price: 160,
-  //     description: "pizza is good",
-  //     imageURL:
-  //       "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
-  //   },
-  //   {
-  //     id: 3,
-  //     quantity: 5,
-  //     name: "pizza",
-  //     price: 180,
-  //     description: "pizza is good",
-  //     imageURL:
-  //       "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
-  //   },
-  // ];
+  const [model, setModal] = useState(false);
 
-
-  // const [products,setProduct]=useState([])
-  const [modal,setModal]=useState(false)
-  // const addProduct=(product)=>{
-  //   setProduct([...products,product])
-  //   setModal(false)
-
-  // }
-  const {products,addProduct}=useProduct()
-  console.log(products)
   return (
     <div className="h-screen w-screen ">
-      {/* <!-- The button to open modal --> */}
-
-    
-        {/* <label htmlFor="add_product-modal" className="btn modal-button">
-          Add Product in store
-        </label> */}
-
-        <input type="checkbox" onChange={()=>setModal(true)} checked={ modal} id="add_product-modal" className="modal-toggle" />
-        <div className="modal">
-          <div className="modal-box relative">
-          <button onClick={()=>setModal(false)} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
-            <AddProduct addProduct={addProduct}/>
-            <div className="modal-action">
-              {/* <label htmlFor="add_product-modal" className="btn">
-                Add Product in store
-              </label> */}
-            </div>
-          </div>
+      <input
+        checked={model}
+        onChange={() => setModal(true)}
+        type="checkbox"
+        id="ad_product_model"
+        className="modal-toggle !block "
+      />
+      <div className="modal">
+        <div className="modal-box relative">
+          <button
+            onClick={() => setModal(false)}
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </button>
+          <AddProduct addProduct={addProduct} />
         </div>
-        <div className="flex justify-end mx-10 my-6">
-        <button onClick={()=>setModal(true)} className="btn btn-primary">add products</button>
-
       </div>
-      <div className="overflow-x-hidden">
+      <div className="flex justify-end mx-3 my-4">
+        <button onClick={() => setModal(true)} className="btn modal-button">
+          Add Product
+        </button>
+      </div>
+      <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
-          {/* <!-- head --> */}
           <thead>
             <tr>
-              <th>id</th>
+              <th></th>
               <th>Name</th>
               <th>Quantity</th>
-              <th>Price</th>
-              <th>Image</th>
+              <th>price</th>
+              <th>image</th>
             </tr>
           </thead>
           <tbody>
-            {/* <!-- row 1 --> */}
-            {products.map((product) => {
-              return <ProductRow key={product.id} product={product} />;
-            })}
+            {products.map((product) => (
+              <ProductRow key={product.id} product={product} />
+            ))}
           </tbody>
         </table>
       </div>
@@ -93,4 +54,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default Products;

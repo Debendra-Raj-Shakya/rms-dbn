@@ -1,16 +1,16 @@
 import React from "react";
 
 const ProductRow = ({
-  product: { id, imageURL, quantity, description, name, price },
+  product: { id, quantity, price, description, imageUrl, name },
 }) => {
   return (
-    <tr key={id}>
-      <th>{id}</th>
+    <tr>
+      <td>{id}</td>
       <td>{name}</td>
       <td>{quantity}</td>
       <td>{price}</td>
       <td>
-        <img src={imageURL} alt={name} height={80} width={80} />
+        <img src={imageUrl} alt={name} height={80} width={80} />
       </td>
     </tr>
   );

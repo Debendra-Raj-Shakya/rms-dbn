@@ -1,16 +1,12 @@
 import React from "react";
-import { useBilling } from "../../context/Billing";
+import { useBilling } from "../../contexts/Billing";
 import Order from "./Order";
 
 const Orders = () => {
   const { getActiveOrder: orders } = useBilling();
-  const getTotalAmount = () => {
-    return orders
-      ? orders.reduce((x, y) => {
-          return (x = x + y.price * y.quantity);
-        }, 0)
-      : 0;
-  };
+  const getTotalAmount = () =>
+    orders ? orders.reduce((x, y) => (x += y.price * y.quantity), 0) : 0;
+
   return (
     <div className="h-[500px]">
       <table className="table w-full">
@@ -22,8 +18,7 @@ const Orders = () => {
           </tr>
         </thead>
         <tbody>
-          {orders &&
-            orders.map((order) => <Order key={order.id} order={order} />)}
+          {orders && orders.map((order) => <Order order={order} />)}
         </tbody>
       </table>
       <hr />
