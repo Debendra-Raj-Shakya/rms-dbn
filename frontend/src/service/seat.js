@@ -9,7 +9,7 @@ export const getOrder = async (deskId) => {
 };
 
 export const addOrder = async (seatId, productId, quantity) => {
-  api.post(`/order/${deskId}`, { productId, quantity });
+  api.post(`/order/${seatId}`, { productId, quantity });
 };
 
 export const checkOutOrder = async (seatId) => {

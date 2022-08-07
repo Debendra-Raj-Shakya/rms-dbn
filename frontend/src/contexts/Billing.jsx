@@ -1,5 +1,18 @@
-import React, { createContext, useContext, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useProduct } from "./Product";
+
+import {
+  addOrder as addOrderService,
+  checkOutOrder,
+  getOrder,
+  getSeat,
+} from "../service/seat";
 import { v4 as uuidv4 } from "uuid";
 import { useToast } from "./Toast";
 const BillingContext = createContext(undefined);
@@ -7,57 +20,52 @@ const BillingProvider = ({ children }) => {
   const { products, updateQuantity } = useProduct();
   const { addToast } = useToast();
 
-  const [desks, setDesks] = useState({
-    1: [],
-    2: [],
-    3: [],
-    4: [],
-    5: [],
-    6: [],
-    7: [],
-    8: [],
-    9: [],
-    10: [],
-  });
-  const [activeState, setActiveState] = useState("1");
+  const [desks, setDesks] = useState([]);
+  const [activeState, setActiveState] = useState();
+  const [orders, setOrders] = useState([]);
 
-  const getIndexes = (() => {
-    return Object.keys(desks);
-  })();
-  const getActiveOrder = 
-    (() =>
-     desks[activeState].find((order) => order.status === 0)
-        ? desks[activeState].find((order) => order.status === 0).orders
-        : undefined
-  )();
+  useEffect(() => {
+    const fetchSeats = async () => {
+      try {
+        const res = await getSeat();
+        const array = res.data.sort((a, b) => a.label - b.label);
+        setDesks(array); //eta chai label dine
+        setActiveState(array[0]._id);
+      } catch (err) {}
+    };
+    fetchSeats();
+  }, []);
 
-  const addOrder = (productId, quantity) => {
-    const id = uuidv4();
-    const selectedProduct = products.find((p) => p.id === productId);
+  useEffect(() => {
+    if (activeState) {
+      const fetchOrder = async () => {
+        try {
+          const res = await getOrder(activeState);
+          setOrders(res.data); //data sanga gareko cha
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetchOrder();
+    }
+  }, [activeState]);
+  // const getIndexes = (() => {
+  //   return Object.keys(desks);
+  // })();
+  // const getActiveOrder = (() =>
+  //   desks[activeState].find((order) => order.status === 0)
+  //     ? desks[activeState].find((order) => order.status === 0).orders
+  //     : undefined)();
+
+  const addOrder = async (productId, quantity, seatId = activeState) => {
+    const selectedProduct = products.find((p) => p._id === productId);
     if (selectedProduct.quantity >= quantity) {
       const newDesks = { ...desks };
-      if (getActiveOrder) {
-        newDesks[activeState]
-          .find((order) => order.status === 0)
-          .orders.push({
-            id,
-            name: selectedProduct.name,
-            price: selectedProduct.price,
-            quantity: quantity,
-          });
-      } else {
-        newDesks[activeState].push({
-          status: 0,
-          orders: [
-            {
-              id,
-              name: selectedProduct.name,
-              price: selectedProduct.price,
-              quantity: quantity,
-            },
-          ],
-        });
-      }
+      const res = await addOrderService(seatId, productId, quantity);
+      const order = res.data;
+      const newOrders = [...orders];
+      newOrders.push(order);
+      setOrders(newOrders);
 
       updateQuantity(productId, quantity);
       setDesks(newDesks);
@@ -65,22 +73,19 @@ const BillingProvider = ({ children }) => {
       addToast({ type: "error", message: "Out of order" });
     }
   };
-  const checkOut = () => {
-    const newDesks = { ...desks };
-    if (getActiveOrder) {
-      newDesks[activeState].find((order) => order.status === 0).status = 1;
-      setDesks(newDesks);
-    }
+  const checkOut = async () => {
+    await checkOutOrder(activeState);
+    setOrders([]);
   };
   return (
     <BillingContext.Provider
       value={{
         setActiveState,
         activeState,
-        getIndexes,
-        getActiveOrder,
+        orders,
         addOrder,
         checkOut,
+        desks,
       }}
     >
       {children}
